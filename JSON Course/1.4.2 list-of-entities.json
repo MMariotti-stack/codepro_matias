@@ -1,0 +1,18 @@
+[
+    {
+        "title": "Basic Entity Info",
+        "author": "John Doe",
+        "year": 2023
+    },
+    {
+        "title": "Advanced Entity Info",
+        "author": "Jane Smith",
+        "year": 2024,
+        "soldOut": true
+    },
+    {
+        "title": "Basic Entity Info",
+        "author": "John Doe",
+        "year": 2023
+    }
+]

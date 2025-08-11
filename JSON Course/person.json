@@ -1,0 +1,11 @@
+{
+    "name": "John",
+    "age": 30,
+    "isStudent": false,
+    "hobbies": ["reading", "gaming", "hiking", 1, null],
+    "spouse": {
+        "name": "Jane",
+        "age": 28
+    }
+}
+
