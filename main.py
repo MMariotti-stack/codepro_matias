@@ -2,7 +2,7 @@ import random
 
 class Tablero:
     def __init__(self):
-        self.matriz = [["." for i in range(5)] for i in range(5)]
+        self.matriz = [["." for i in range(5)] for j in range(5)]
     
     def es_valida(self, x, y):
         return 0 <= x < 5 and 0 <= y < 5
@@ -10,14 +10,14 @@ class Tablero:
     def mostrar(self, gato, raton):
         for fila in range(5):
             for col in range(5):
-                self.matriz[fila][col] = "."
+                self.matriz[fila][col] = "." #2
         
         self.matriz[gato.x][gato.y] = "G"
         self.matriz[raton.x][raton.y] = "R"
         
         print("\nTablero")
         for fila in self.matriz:
-            print(" ".join(fila))
+            print(" ".join(fila)) #3
         print()
     
     def distancia(self, x1, y1, x2, y2):
@@ -73,6 +73,7 @@ class Gato:
             return mejor_valor
     
     def elegir_movimiento(self, tablero, raton):
+
         movimientos = self.movimientos_posibles(tablero)
         if not movimientos:
             return False
@@ -90,8 +91,6 @@ class Gato:
         if mejor_movimiento:
             self.x, self.y = mejor_movimiento
             return True
-        
-        return False
 
 class Raton:
     def __init__(self):
@@ -111,6 +110,7 @@ class Raton:
         return movimientos
     
     def mover_aleatorio(self, tablero):
+
         movimientos = self.movimientos_posibles(tablero)
         
         if movimientos:
@@ -118,7 +118,6 @@ class Raton:
             self.x, self.y = movimiento_elegido
             return True
         
-        return False
 
 class Juego:
     def __init__(self):
@@ -128,30 +127,30 @@ class Juego:
         self.turno = 0
         self.max_turnos = 10
     
-    def gato_atrapo_raton(self):
+    def gato_atrapa_raton(self):
         return self.gato.x == self.raton.x and self.gato.y == self.raton.y
     
     def jugar(self):
         print("Gato vs Raton")
+        print(f"El gato inicia en la posicion ({self.gato.x}, {self.gato.y})")
+        print(f"El raton inicia en la posicion ({self.raton.x}, {self.raton.y})")
         
         while self.turno < self.max_turnos:
             print(f"\nTurno {self.turno + 1}/{self.max_turnos}")
             
             self.tablero.mostrar(self.gato, self.raton)
             
-            distancia = self.tablero.distancia(self.gato.x, self.gato.y, self.raton.x, self.raton.y)
-            
             self.gato.elegir_movimiento(self.tablero, self.raton)
             
-            if self.gato_atrapo_raton():
+            if self.gato_atrapa_raton():
                 print("\nFin del juego")
                 self.tablero.mostrar(self.gato, self.raton)
-                print("El gato gana")
+                print("El gato atrapo al raton")
                 return
             
             self.raton.mover_aleatorio(self.tablero)
             
-            if self.gato_atrapo_raton():
+            if self.gato_atrapa_raton():
                 print("\nFin del juego")
                 self.tablero.mostrar(self.gato, self.raton)
                 print("El gato gana")
@@ -159,9 +158,9 @@ class Juego:
             
             self.turno += 1
             
-            input("Presiona enter para continuar")
+            input("Presiona enter para continuar al siguiente turno")
         
-        print("\nEl raton escapo")
+        print("El raton escapo")
 
 if __name__ == "__main__":
     juego = Juego()
